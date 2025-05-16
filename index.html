@@ -5,201 +5,192 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Stars & Stripes Lawn Care</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #001F3F, #004d40);
-      color: white;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -50%;
-      width: 200%;
-      height: 100%;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);
-      animation: shimmer 25s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes shimmer {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
     }
 
     header {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 60px 20px;
+      background: url('https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      position: relative;
-      z-index: 1;
+      color: white;
+      padding: 20px;
     }
 
     header h1 {
       font-size: 3em;
-      color: #4CAF50;
-      margin-bottom: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 10px;
     }
 
-    .tagline {
-      font-size: 1.3em;
-      color: #ccc;
+    header p {
+      font-size: 1.5em;
+      margin-top: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 5px 15px;
+      border-radius: 10px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
     }
 
     .logo {
-      width: 400px;
-      max-width: 90%;
-      margin: 40px auto;
       display: block;
+      margin: 30px auto;
+      max-width: 500px;
+      width: 90%;
       border-radius: 10px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-      animation: fadeIn 2s ease-in forwards;
-      opacity: 0;
-      position: relative;
-      z-index: 1;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    .logo:hover {
+      transform: scale(1.05);
     }
 
     .section {
-      padding: 40px 20px;
       text-align: center;
-      max-width: 900px;
-      margin: auto;
-      position: relative;
-      z-index: 1;
+      margin-bottom: 50px;
     }
 
     .section h2 {
-      font-size: 2em;
+      font-size: 2.5em;
       margin-bottom: 20px;
-      color: #4CAF50;
+      color: #2e7d32;
     }
 
     .section p {
       font-size: 1.1em;
-      margin-bottom: 10px;
-      line-height: 1.6;
     }
 
-    .btn {
-      display: inline-block;
-      background: #4CAF50;
-      color: white;
-      padding: 12px 25px;
-      text-decoration: none;
-      border-radius: 25px;
-      margin-top: 20px;
-      transition: background 0.3s ease;
-    }
-
-    .btn:hover {
-      background: #45a049;
-    }
-
-    .quote-form {
+    form {
+      max-width: 600px;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       gap: 15px;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
     }
 
-    .quote-form input,
-    .quote-form textarea {
-      padding: 10px;
+    input, textarea {
+      padding: 12px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 12px;
+      background: #2e7d32;
+      color: white;
       border: none;
       border-radius: 5px;
       font-size: 1em;
-    }
-
-    .quote-form button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 5px;
       cursor: pointer;
       transition: background 0.3s ease;
     }
 
-    .quote-form button:hover {
-      background-color: #45a049;
-    }
-
-    .venmo-link {
-      display: inline-block;
-      margin-top: 10px;
-      font-size: 1em;
-      color: #4CAF50;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .venmo-link:hover {
-      text-decoration: underline;
+    button:hover {
+      background: #1b5e20;
     }
 
     blockquote {
-      background: rgba(255,255,255,0.05);
-      padding: 15px 20px;
-      margin: 15px auto;
-      border-left: 5px solid #4CAF50;
-      font-style: italic;
+      background: #e8f5e9;
+      padding: 20px;
+      margin: 20px auto;
       max-width: 700px;
+      font-style: italic;
+      border-left: 6px solid #66bb6a;
+    }
+
+    .social {
+      margin-top: 20px;
+    }
+
+    .social a {
+      display: inline-block;
+      margin: 10px;
+      color: #2e7d32;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1em;
+    }
+
+    .social a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background: #222;
+      color: #aaa;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 0.9em;
     }
 
     .sticky-call {
       position: fixed;
-      bottom: 15px;
-      right: 15px;
-      background: #4CAF50;
+      bottom: 20px;
+      right: 20px;
+      background: #2e7d32;
       color: white;
       padding: 12px 20px;
       border-radius: 50px;
-      font-weight: bold;
       text-decoration: none;
+      font-weight: bold;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       z-index: 1000;
+      transition: background 0.3s;
     }
 
     .sticky-call:hover {
-      background: #45a049;
+      background: #1b5e20;
     }
 
-    footer {
-      background: #111;
-      text-align: center;
-      padding: 20px 10px;
-      font-size: 0.9em;
-      position: relative;
-      z-index: 1;
+    .swiper {
+      width: 100%;
+      max-width: 1000px;
+      padding-top: 40px;
+      padding-bottom: 60px;
     }
 
-    footer a {
-      color: #4CAF50;
-      text-decoration: none;
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 90%;
+      max-width: 600px;
+      height: 350px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     @media (max-width: 600px) {
       header h1 { font-size: 2em; }
-      .section h2 { font-size: 1.5em; }
-      .btn { padding: 10px 20px; }
-      .logo { width: 90%; }
+      header p { font-size: 1em; }
+      .section h2 { font-size: 1.8em; }
+      .swiper-slide { height: 250px; }
     }
   </style>
 </head>
@@ -207,49 +198,87 @@
 
   <header>
     <h1>Stars & Stripes Lawn Care</h1>
-    <p class="tagline">Veteran Owned & Operated</p>
+    <p>Veteran Owned & Operated</p>
   </header>
 
-  <!-- Clickable Logo Image -->
   <a href="IMG_7982.png" target="_blank">
     <img src="IMG_7970.jpeg" alt="Stars and Stripes Logo" class="logo">
   </a>
 
-  <div class="section">
-    <h2>“Make Your Yard Great Again!”</h2>
-    <p>We take pride in transforming your yard into a pristine, all-American landscape. Trust our veteran-owned service for precision, punctuality, and patriotic care.</p>
-    <a href="tel:8597793272" class="btn">Call Tommy Now</a>
+  <div class="container">
+    <div class="section">
+      <h2>“Make Your Yard Great Again!”</h2>
+      <p>We provide reliable, high-quality lawn care with military precision and pride. Serving our community with American values and green results.</p>
+    </div>
+
+    <div class="section">
+      <h2>Photo Gallery</h2>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="IMG_7985.jpeg" alt="Gallery 1"></div>
+          <div class="swiper-slide"><img src="IMG_7986.jpeg" alt="Gallery 2"></div>
+          <div class="swiper-slide"><img src="IMG_7987.jpeg" alt="Gallery 3"></div>
+          <div class="swiper-slide"><img src="IMG_7988.jpeg" alt="Gallery 4"></div>
+          <div class="swiper-slide"><img src="IMG_7989.jpeg" alt="Gallery 5"></div>
+          <div class="swiper-slide"><img src="IMG_7990.jpeg" alt="Gallery 6"></div>
+          <div class="swiper-slide"><img src="IMG_7991.jpeg" alt="Gallery 7"></div>
+          <div class="swiper-slide"><img src="IMG_7992.jpeg" alt="Gallery 8"></div>
+          <div class="swiper-slide"><img src="IMG_7993.jpeg" alt="Gallery 9"></div>
+          <div class="swiper-slide"><img src="IMG_7994.jpeg" alt="Gallery 10"></div>
+        </div>
+        <!-- Swiper Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Request a Free Quote</h2>
+      <form action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" placeholder="Tell us about your yard..." rows="5" required></textarea>
+        <button type="submit">Send Request</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h2>What Our Clients Say</h2>
+      <blockquote>"Tommy is punctual, professional, and transformed my yard like magic!" – Mary A.</blockquote>
+      <blockquote>"Best lawn service in town. Honest pricing and great results." – Jason R.</blockquote>
+    </div>
+
+    <div class="section">
+      <h2>Connect With Us</h2>
+      <div class="social">
+        <a href="https://www.facebook.com/share/1HFSWxWzpG/?mibextid=wwXIfr" target="_blank">Facebook</a>
+        <a href="https://venmo.com/Thomas-L-Dees" target="_blank">@Thomas-L-Dees on Venmo</a>
+      </div>
+    </div>
   </div>
 
-  <div class="section">
-    <h2>Request a Free Quote</h2>
-    <form action="mailto:your@email.com" method="POST" enctype="text/plain" class="quote-form">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="tel" name="phone" placeholder="Phone Number" required>
-      <input type="email" name="email" placeholder="Email Address" required>
-      <textarea name="message" placeholder="Tell us about your yard..." rows="5" required></textarea>
-      <button type="submit">Send Request</button>
-    </form>
-  </div>
-
-  <div class="section">
-    <h2>What Our Clients Say</h2>
-    <blockquote>"Tommy and his team are fantastic! My lawn has never looked better!" – Sarah J.</blockquote>
-    <blockquote>"Reliable, professional, and affordable. Highly recommend Stars & Stripes." – Mike T.</blockquote>
-  </div>
-
-  <div class="section">
-    <h2>Connect With Us</h2>
-    <p>Follow us on <a href="https://www.facebook.com/share/1HFSWxWzpG/?mibextid=wwXIfr" target="_blank">Facebook</a> for updates, seasonal tips, and special offers.</p>
-    <a class="venmo-link" href="https://venmo.com/Thomas-L-Dees" target="_blank">@Thomas-L-Dees on Venmo</a>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 Stars & Stripes Lawn Care. All rights reserved. | <a href="tel:8597793272">859-779-3272</a></p>
-  </footer>
-
-  <!-- Sticky Call Button -->
   <a href="tel:8597793272" class="sticky-call">Call Tommy</a>
 
+  <footer>
+    &copy; 2025 Stars & Stripes Lawn Care | Berea, KY | <a href="tel:8597793272" style="color:#66bb6a;">859-779-3272</a>
+  </footer>
+
+  <!-- SwiperJS Scripts -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      }
+    });
+  </script>
 </body>
 </html>
