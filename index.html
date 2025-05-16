@@ -8,10 +8,43 @@
     body {
       font-family: 'Arial', sans-serif;
       text-align: center;
-      background: #f5f5f5;
+      background: #000; /* Change background to black for better star visibility */
       color: #333;
       margin: 0;
       padding: 0;
+      overflow: hidden;
+    }
+    .stars {
+      width: 100%;
+      height: 100vh;
+      background: transparent;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    .stars::before, .stars::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      box-shadow: 
+        50px 100px white, 100px 200px white, 150px 300px white, 200px 400px white,
+        250px 500px white, 300px 600px white, 350px 700px white, 400px 800px white,
+        450px 900px white, 500px 1000px white, 550px 1100px white, 600px 1200px white,
+        650px 1300px white, 700px 1400px white, 750px 1500px white, 800px 1600px white,
+        850px 1700px white, 900px 1800px white, 950px 1900px white, 1000px 2000px white,
+        1050px 2100px white, 1100px 2200px white, 1150px 2300px white, 1200px 2400px white,
+        1250px 2500px white, 1300px 2600px white, 1350px 2700px white, 1400px 2800px white,
+        1450px 2900px white, 1500px 3000px white, 1550px 3100px white, 1600px 3200px white,
+        1650px 3300px white, 1700px 3400px white, 1750px 3500px white, 1800px 3600px white,
+        1850px 3700px white, 1900px 3800px white, 1950px 3900px white, 2000px 4000px white;
+      animation: twinkling 100s infinite;
+    }
+    @keyframes twinkling {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-2000px); }
     }
     header {
       background: #4CAF50;
@@ -27,6 +60,7 @@
     }
     .logo {
       margin: 20px 0;
+      width: 250px; /* Increase the width of the image */
       opacity: 0;
       animation: fadeIn 2s forwards;
     }
@@ -68,11 +102,12 @@
   </style>
 </head>
 <body>
+  <div class="stars"></div>
   <header>
     <h1>Stars & Stripes Lawn Care</h1>
   </header>
   <div class="container">
-    <img src="IMG_7970.jpeg" alt="Stars and Stripes Logo" width="200" class="logo">
+    <img src="IMG_7970.jpeg" alt="Stars and Stripes Logo" class="logo">
     <div class="content">
       <p><strong>Veteran Owned & Operated</strong></p>
       <p>“Make Your Yard Great Again!”</p>
@@ -83,10 +118,6 @@
     </div>
   </div>
   <footer>
-    <p>&copy; 2023 Stars & Stripes Lawn Care. All rights reserved.</p>
-  </footer>
-</body>
-</html>
     <p>&copy; 2023 Stars & Stripes Lawn Care. All rights reserved.</p>
   </footer>
 </body>
