@@ -17,8 +17,8 @@
     }
 
     header {
-      background: linear-gradient(to right, #1e3c72, #fff, #c62828);
-      height: 50vh;
+      background: linear-gradient(135deg, #0033A0, #ffffff, #D52B1E);
+      height: 60vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -31,7 +31,7 @@
 
     header h1 {
       font-size: 2.5em;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.4);
       padding: 10px 20px;
       border-radius: 10px;
     }
@@ -115,24 +115,19 @@
 
     .social {
       margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
     }
 
     .social a {
-      padding: 10px 20px;
-      background: #2e7d32;
-      color: white;
-      border-radius: 30px;
-      text-decoration: none;
+      display: inline-block;
+      margin: 10px;
+      color: #2e7d32;
       font-weight: bold;
-      transition: background 0.3s ease;
+      text-decoration: none;
+      font-size: 1.1em;
     }
 
     .social a:hover {
-      background: #1b5e20;
+      text-decoration: underline;
     }
 
     footer {
@@ -147,7 +142,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: #c62828;
+      background: #d32f2f;
       color: white;
       padding: 12px 20px;
       border-radius: 50px;
@@ -159,7 +154,7 @@
     }
 
     .sticky-call:hover {
-      background: #a11212;
+      background: #b71c1c;
     }
 
     .swiper {
@@ -187,16 +182,17 @@
       display: block;
     }
 
-    iframe {
+    iframe.map {
       width: 100%;
       height: 400px;
-      border: 0;
+      border: none;
+      margin-top: 30px;
       border-radius: 10px;
-      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     @media (max-width: 600px) {
-      header h1 { font-size: 1.8em; }
+      header h1 { font-size: 2em; }
       header p { font-size: 1em; }
       .section h2 { font-size: 1.8em; }
       .swiper-slide { height: 250px; }
@@ -204,12 +200,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Background Music -->
-  <audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-america.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
   <header>
     <h1>Stars & Stripes Lawn Care</h1>
@@ -261,17 +251,17 @@
     </div>
 
     <div class="section">
-      <h2>Our Service Area</h2>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97680.35172179134!2d-84.36967123399291!3d37.60436830289413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8842c0d2df9dd4fb%3A0x98df21c5de90500b!2sMadison%20County%2C%20KY!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus" allowfullscreen loading="lazy"></iframe>
-    </div>
-
-    <div class="section">
       <h2>Connect With Us</h2>
       <div class="social">
         <a href="https://www.facebook.com/share/1HFSWxWzpG/?mibextid=wwXIfr" target="_blank">Facebook</a>
-        <a href="https://venmo.com/Thomas-L-Dees" target="_blank">Venmo @Thomas-L-Dees</a>
+        <a href="https://venmo.com/Thomas-L-Dees" target="_blank">@Thomas-L-Dees on Venmo</a>
       </div>
     </div>
+
+    <iframe class="map"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51062.850477261535!2d-84.34107888734326!3d37.60623955930848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8842f5993c81030f%3A0x62acb390eaa5cd79!2sMadison%20County%2C%20KY!5e0!3m2!1sen!2sus!4v1683320384859"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
   </div>
 
   <a href="tel:8597793272" class="sticky-call">Call Tommy</a>
@@ -279,6 +269,11 @@
   <footer>
     &copy; 2025 Stars & Stripes Lawn Care | Berea, KY | <a href="tel:8597793272" style="color:#66bb6a;">859-779-3272</a>
   </footer>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_6db232a6ac.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
