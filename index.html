@@ -1,33 +1,208 @@
-<style>
-  header {
-    background: url('https://images.unsplash.com/photo-1601597111158-4f39a54d8314?auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    padding: 20px;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stars & Stripes Lawn Care</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+    }
 
-  header h1 {
-    font-size: 3em;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-    border-radius: 10px;
-  }
+    header {
+      background: url('https://images.unsplash.com/photo-1601597111158-4f39a54d8314?auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
 
-  header p {
-    font-size: 1.5em;
-    margin-top: 10px;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 5px 15px;
-    border-radius: 10px;
-  }
-</style>
+    header h1 {
+      font-size: 3em;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
 
-<header>
-  <h1>Stars & Stripes Lawn Care</h1>
-  <p>Veteran Owned & Operated</p>
-</header>
+    header p {
+      font-size: 1.5em;
+      margin-top: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 5px 15px;
+      border-radius: 10px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 400px;
+      max-width: 90%;
+      margin: 30px auto;
+      transition: transform 0.3s;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .content p {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .contact a {
+      color: #2e7d32;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    .form-section {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin: 40px 0;
+    }
+
+    .form-section h2 {
+      margin-bottom: 20px;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    form button {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    form button:hover {
+      background: #1b5e20;
+    }
+
+    .carousel img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    footer {
+      background: #222;
+      color: #eee;
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: #66bb6a;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Stars & Stripes Lawn Care</h1>
+    <p>Veteran Owned & Operated</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Clickable Logo -->
+    <a href="IMG_7982.png" target="_blank">
+      <img src="IMG_7970.jpeg" alt="Stars and Stripes Logo" class="logo">
+    </a>
+
+    <!-- Slogan and Contact -->
+    <div class="content">
+      <p>“Make Your Yard Great Again!”</p>
+      <p>Call Tommy: <a href="tel:8597793272">859-779-3272</a></p>
+      <p>Facebook: <a href="https://www.facebook.com/share/1HFSWxWzpG/?mibextid=wwXIfr" target="_blank">Visit Us</a></p>
+      <p>Support Us: <a href="https://venmo.com/u/Thomas-L-Dees" target="_blank">@Thomas-L-Dees</a></p>
+    </div>
+
+    <!-- Quote Form -->
+    <div class="form-section">
+      <h2>Request a Free Quote</h2>
+      <form action="https://formsubmit.co/tommydees21@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" rows="5" placeholder="Tell us about your lawn care needs..." required></textarea>
+        <button type="submit">Get My Quote</button>
+      </form>
+    </div>
+
+    <!-- Carousel -->
+    <div class="carousel">
+      <div><img src="IMG_7985.jpeg" alt="Gallery Image 1"></div>
+      <div><img src="IMG_7986.jpeg" alt="Gallery Image 2"></div>
+      <div><img src="IMG_7987.jpeg" alt="Gallery Image 3"></div>
+      <div><img src="IMG_7988.jpeg" alt="Gallery Image 4"></div>
+      <div><img src="IMG_7989.jpeg" alt="Gallery Image 5"></div>
+      <div><img src="IMG_7990.jpeg" alt="Gallery Image 6"></div>
+      <div><img src="IMG_7991.jpeg" alt="Gallery Image 7"></div>
+      <div><img src="IMG_7992.jpeg" alt="Gallery Image 8"></div>
+      <div><img src="IMG_7993.jpeg" alt="Gallery Image 9"></div>
+      <div><img src="IMG_7994.jpeg" alt="Gallery Image 10"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Stars & Stripes Lawn Care. All rights reserved.</p>
+    <p><a href="mailto:tommydees21@gmail.com">tommydees21@gmail.com</a></p>
+  </footer>
+
+  <!-- Carousel Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.carousel').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: true,
+        adaptiveHeight: true
+      });
+    });
+  </script>
+
+</body>
+</html>
