@@ -14,42 +14,36 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #000;
+      background: linear-gradient(135deg, #001F3F, #004d40);
       color: white;
       overflow-x: hidden;
+      position: relative;
     }
 
-    .stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .stars::before, .stars::after {
-      content: '';
+    /* Background shimmer animation */
+    body::before {
+      content: "";
       position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      box-shadow: 
-        50px 100px white, 150px 300px white, 250px 500px white, 350px 700px white,
-        450px 900px white, 550px 1100px white, 650px 1300px white, 750px 1500px white,
-        850px 1700px white, 950px 1900px white, 1050px 2100px white, 1150px 2300px white;
-      animation: twinkling 80s linear infinite;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+      animation: shimmer 25s linear infinite;
+      z-index: 0;
     }
 
-    @keyframes twinkling {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-1000px); }
+    @keyframes shimmer {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     header {
       background: rgba(0, 0, 0, 0.6);
       padding: 60px 20px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     header h1 {
@@ -60,17 +54,20 @@
 
     .tagline {
       font-size: 1.3em;
-      color: #ddd;
+      color: #ccc;
     }
 
     .logo {
-      width: 200px;
-      margin: 30px auto;
+      width: 400px;
+      max-width: 90%;
+      margin: 40px auto;
       display: block;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
       animation: fadeIn 2s ease-in forwards;
       opacity: 0;
+      position: relative;
+      z-index: 1;
     }
 
     @keyframes fadeIn {
@@ -82,6 +79,8 @@
       text-align: center;
       max-width: 900px;
       margin: auto;
+      position: relative;
+      z-index: 1;
     }
 
     .section h2 {
@@ -130,6 +129,7 @@
       padding: 20px 10px;
       font-size: 0.9em;
       position: relative;
+      z-index: 1;
     }
 
     footer a {
@@ -153,11 +153,14 @@
       .btn {
         padding: 10px 20px;
       }
+
+      .logo {
+        width: 90%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="stars"></div>
 
   <header>
     <h1>Stars & Stripes Lawn Care</h1>
