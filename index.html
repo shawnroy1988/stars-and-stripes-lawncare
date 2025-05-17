@@ -206,28 +206,26 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    .game-modal {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      display: none;
-      justify-content: center;
+    /* Game Styles */
+    .game-container {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      z-index: 9999;
+      margin-top: 40px;
     }
 
-    .game-modal canvas {
+    .game-container canvas {
       border: 3px solid #66bb6a;
       background: #c8facc;
       box-shadow: 0 0 15px #000;
+      max-width: 100%;
+      height: auto;
     }
 
     .score {
-      color: white;
+      color: #2e7d32;
       font-size: 1.2em;
-      position: absolute;
-      top: 20px;
-      left: 20px;
+      margin-bottom: 10px;
     }
 
     @media (max-width: 600px) {
@@ -251,7 +249,16 @@
     <div class="section">
       <h2>“Make Your Yard Great Again!”</h2>
       <p>We provide reliable, high-quality lawn care with military precision and pride. Serving our community with American values and green results.</p>
-      <a class="game-button play-game-btn">🎮 Play Lawn Mower Game</a>
+    </div>
+
+    <!-- Game Section -->
+    <div class="section">
+      <h2>🎮 Lawn Mower Game</h2>
+      <div class="game-container">
+        <div class="score" id="score">Score: 0</div>
+        <canvas id="gameCanvas" width="500" height="500"></canvas>
+        <audio id="mowerSound" src="https://cdn.pixabay.com/audio/2023/03/05/audio_5d42161df0.mp3" preload="auto"></audio>
+      </div>
     </div>
 
     <div class="section">
@@ -287,127 +294,4 @@
     <div class="section">
       <h2>What Our Clients Say</h2>
       <blockquote>"Tommy is punctual, professional, and transformed my yard like magic!" – Mary A.</blockquote>
-      <blockquote>"Best lawn service in town. Honest pricing and great results." – Jason R.</blockquote>
-    </div>
-
-    <div class="section">
-      <h2>Connect With Us</h2>
-      <div class="social">
-        <a href="https://www.facebook.com/share/1HFSWxWzpG/?mibextid=wwXIfr" target="_blank">📘 Facebook</a>
-        <a href="https://venmo.com/Thomas-L-Dees" target="_blank">💸 Venmo</a>
-      </div>
-    </div>
-
-    <iframe class="map"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51062.850477261535!2d-84.34107888734326!3d37.60623955930848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8842f5993c81030f%3A0x62acb390eaa5cd79!2sMadison%20County%2C%20KY!5e0!3m2!1sen!2sus!4v1683320384859"
-      allowfullscreen="" loading="lazy">
-    </iframe>
-  </div>
-
-  <a href="tel:8597793272" class="sticky-call">Call Tommy</a>
-
-  <footer>
-    &copy; 2025 Stars & Stripes Lawn Care | Berea, KY | <a href="tel:8597793272" style="color:#66bb6a;">859-779-3272</a>
-  </footer>
-
-  <audio autoplay loop>
-    <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_6db232a6ac.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <!-- Game Modal -->
-  <div class="game-modal">
-    <div class="score" id="score">Score: 0</div>
-    <canvas id="gameCanvas" width="500" height="500"></canvas>
-    <audio id="mowerSound" src="https://cdn.pixabay.com/audio/2023/03/05/audio_5d42161df0.mp3" preload="auto"></audio>
-  </div>
-
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script>
-    const swiper = new Swiper('.swiper', {
-      loop: true,
-      spaceBetween: 30,
-      centeredSlides: true,
-      autoplay: { delay: 3000, disableOnInteraction: false },
-      pagination: { el: '.swiper-pagination', clickable: true }
-    });
-
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const mowerSound = document.getElementById('mowerSound');
-    const modal = document.querySelector('.game-modal');
-    const scoreDisplay = document.getElementById('score');
-
-    let mower = { x: 240, y: 240, size: 20, speed: 20 };
-    let grass = [];
-    let score = 0;
-    let keys = {};
-
-    function generateGrass() {
-      grass = [];
-      for (let x = 0; x < 500; x += 20) {
-        for (let y = 0; y < 500; y += 20) {
-          grass.push({ x, y, cut: false });
-        }
-      }
-    }
-
-    function drawGame() {
-      ctx.clearRect(0, 0, 500, 500);
-      grass.forEach(tile => {
-        ctx.fillStyle = tile.cut ? '#88cc88' : '#4caf50';
-        ctx.fillRect(tile.x, tile.y, 20, 20);
-      });
-
-      ctx.fillStyle = '#000';
-      ctx.fillRect(mower.x, mower.y, mower.size, mower.size);
-    }
-
-    function cutGrass() {
-      grass.forEach(tile => {
-        if (!tile.cut && mower.x === tile.x && mower.y === tile.y) {
-          tile.cut = true;
-          score++;
-          scoreDisplay.textContent = `Score: ${score}`;
-          mowerSound.currentTime = 0;
-          mowerSound.play();
-        }
-      });
-    }
-
-    function updateGame() {
-      if (keys['ArrowUp']) mower.y -= mower.speed;
-      if (keys['ArrowDown']) mower.y += mower.speed;
-      if (keys['ArrowLeft']) mower.x -= mower.speed;
-      if (keys['ArrowRight']) mower.x += mower.speed;
-
-      mower.x = Math.max(0, Math.min(mower.x, 480));
-      mower.y = Math.max(0, Math.min(mower.y, 480));
-
-      cutGrass();
-      drawGame();
-      requestAnimationFrame(updateGame);
-    }
-
-    document.addEventListener('keydown', e => keys[e.key] = true);
-    document.addEventListener('keyup', e => keys[e.key] = false);
-
-    document.querySelector('.play-game-btn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      modal.style.display = 'flex';
-      mower = { x: 240, y: 240, size: 20, speed: 20 };
-      score = 0;
-      scoreDisplay.textContent = 'Score: 0';
-      generateGrass();
-      drawGame();
-      requestAnimationFrame(updateGame);
-    });
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-  </script>
-</body>
-</html>
+      <blockquote>"Best lawn service 
