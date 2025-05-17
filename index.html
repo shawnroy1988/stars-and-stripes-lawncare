@@ -26,7 +26,6 @@
       text-align: center;
       color: white;
       padding: 20px;
-      position: relative;
     }
 
     header h1 {
@@ -102,6 +101,15 @@
 
     button:hover {
       background: #1b5e20;
+    }
+
+    .play-game-btn {
+      margin-top: 20px;
+      background: #0066cc;
+      color: white;
+      font-size: 1.2em;
+      padding: 12px 24px;
+      border-radius: 8px;
     }
 
     blockquote {
@@ -191,6 +199,32 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
+    .game-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    #gameCanvas {
+      background: #88cc88;
+      border: 4px solid #2e7d32;
+      border-radius: 8px;
+    }
+
+    .scoreboard {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 1.5em;
+    }
+
     @media (max-width: 600px) {
       header h1 { font-size: 2em; }
       header p { font-size: 1em; }
@@ -218,16 +252,7 @@
       <h2>Photo Gallery</h2>
       <div class="swiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="IMG_7985.jpeg" alt="Gallery 1"></div>
-          <div class="swiper-slide"><img src="IMG_7986.jpeg" alt="Gallery 2"></div>
-          <div class="swiper-slide"><img src="IMG_7987.jpeg" alt="Gallery 3"></div>
-          <div class="swiper-slide"><img src="IMG_7988.jpeg" alt="Gallery 4"></div>
-          <div class="swiper-slide"><img src="IMG_7989.jpeg" alt="Gallery 5"></div>
-          <div class="swiper-slide"><img src="IMG_7990.jpeg" alt="Gallery 6"></div>
-          <div class="swiper-slide"><img src="IMG_7991.jpeg" alt="Gallery 7"></div>
-          <div class="swiper-slide"><img src="IMG_7992.jpeg" alt="Gallery 8"></div>
-          <div class="swiper-slide"><img src="IMG_7993.jpeg" alt="Gallery 9"></div>
-          <div class="swiper-slide"><img src="IMG_7994.jpeg" alt="Gallery 10"></div>
+          <!-- Image slides go here -->
         </div>
         <div class="swiper-pagination"></div>
       </div>
@@ -242,6 +267,7 @@
         <textarea name="message" placeholder="Tell us about your yard..." rows="5" required></textarea>
         <button type="submit">Send Request</button>
       </form>
+      <button class="play-game-btn" onclick="document.querySelector('.game-modal').style.display='flex'">🎮 Play Lawn Mower Game</button>
     </div>
 
     <div class="section">
@@ -251,17 +277,22 @@
     </div>
 
     <div class="section">
-  <h2>Connect With Us</h2>
-  <div class="social">
-    <a class="social-btn fb" href="https://www.facebook.com/share/1HFSWxWzpG/?mibextid=wwXIfr" target="_blank">📘 Facebook</a>
-    <a class="social-btn venmo" href="https://venmo.com/Thomas-L-Dees" target="_blank">💸 Venmo</a>
-  </div>
-</div>
+      <h2>Connect With Us</h2>
+      <div class="social">
+        <a href="https://www.facebook.com/share/1HFSWxWzpG/?mibextid=wwXIfr" target="_blank">📘 Facebook</a>
+        <a href="https://venmo.com/Thomas-L-Dees" target="_blank">💸 Venmo</a>
+      </div>
+    </div>
 
     <iframe class="map"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51062.850477261535!2d-84.34107888734326!3d37.60623955930848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8842f5993c81030f%3A0x62acb390eaa5cd79!2sMadison%20County%2C%20KY!5e0!3m2!1sen!2sus!4v1683320384859"
-      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      src="https://www.google.com/maps/embed?...">
     </iframe>
+  </div>
+
+  <div class="game-modal" onclick="this.style.display='none'">
+    <div class="scoreboard" id="score">Score: 0</div>
+    <canvas id="gameCanvas" width="500" height="500"></canvas>
+    <audio id="mowerSound" src="https://cdn.pixabay.com/download/audio/2023/03/26/audio_47b40c2b7b.mp3?filename=lawn-mower-143684.mp3"></audio>
   </div>
 
   <a href="tel:8597793272" class="sticky-call">Call Tommy</a>
@@ -269,11 +300,6 @@
   <footer>
     &copy; 2025 Stars & Stripes Lawn Care | Berea, KY | <a href="tel:8597793272" style="color:#66bb6a;">859-779-3272</a>
   </footer>
-
-  <audio autoplay loop>
-    <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_6db232a6ac.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
@@ -290,6 +316,57 @@
         clickable: true,
       }
     });
+
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const mowerSound = document.getElementById('mowerSound');
+    let score = 0;
+    let mower = { x: 240, y: 240, size: 20, speed: 20 };
+    let grass = [];
+
+    for (let i = 0; i < 500; i += 20)
+      for (let j = 0; j < 500; j += 20)
+        grass.push({ x: i, y: j, cut: false });
+
+    function drawGame() {
+      ctx.clearRect(0, 0, 500, 500);
+      grass.forEach(tile => {
+        ctx.fillStyle = tile.cut ? '#88cc88' : '#4caf50';
+        ctx.fillRect(tile.x, tile.y, 20, 20);
+      });
+      ctx.fillStyle = '#000';
+      ctx.fillRect(mower.x, mower.y, mower.size, mower.size);
+    }
+
+    function cutGrass() {
+      grass.forEach(tile => {
+        if (!tile.cut && mower.x === tile.x && mower.y === tile.y) {
+          tile.cut = true;
+          score += 1;
+          mowerSound.currentTime = 0;
+          mowerSound.play();
+          document.getElementById('score').textContent = "Score: " + score;
+        }
+      });
+    }
+
+    window.addEventListener('keydown', e => {
+      switch(e.key) {
+        case 'ArrowUp': mower.y -= mower.speed; break;
+        case 'ArrowDown': mower.y += mower.speed; break;
+        case 'ArrowLeft': mower.x -= mower.speed; break;
+        case 'ArrowRight': mower.x += mower.speed; break;
+      }
+      if (mower.x < 0) mower.x = 0;
+      if (mower.y < 0) mower.y = 0;
+      if (mower.x > 480) mower.x = 480;
+      if (mower.y > 480) mower.y = 480;
+      cutGrass();
+      drawGame();
+    });
+
+    drawGame();
   </script>
+
 </body>
 </html>
